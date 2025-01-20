@@ -10,10 +10,6 @@ import zipfile
 import urllib.parse
 import shutil
 
-#pip install streamlit pandas matplotlib seaborn numpy
-#Pour lancer : streamlit run CombeOscar_BussardTom.py (dans la console)
-#Il faut avoir le fichier de données dans le même dossier que le fichier python
-
 # Titre de l'application
 st.title("📊 Analyse et Création Interactive d'Indices Financiers")
 
