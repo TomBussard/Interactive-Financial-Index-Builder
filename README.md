@@ -24,14 +24,15 @@ Interactive Financial Index Builder est une application interactive développée
   ```
 
 ### Lancement de l'application
-1.Les données nécessaires au projet sont disponibles ici :
- [Télécharger les données](https://docs.google.com/uc?id=1aTZh6I3Xe2kzgXlkS9520-ThuYDBVYFi&export=download)
-2. Placez le fichier **Data projet indices python.xlsx** dans le même répertoire que le fichier Python.
-3. Lancez l'application avec la commande suivante :
+1. Les données nécessaires au projet sont disponibles ici :  
+   [Télécharger les données](https://docs.google.com/uc?id=1aTZh6I3Xe2kzgXlkS9520-ThuYDBVYFi&export=download)  
+
+2. Placez le fichier **Data projet indices python.xlsx** dans le même répertoire que le fichier Python.  
+
+3. Lancez l'application avec la commande suivante :  
    ```bash
-   streamlit run_Interactive_Financial_Index_Builder.py
+   streamlit run Interactive_Financial_Index_Builder.py
    ```
----
 
 ## Utilisation
 1. **Analyse sectorielle** : Sélectionnez un secteur et des sous-secteurs via le panneau latéral.  
