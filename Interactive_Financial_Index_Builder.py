@@ -9,6 +9,7 @@ from io import BytesIO
 import zipfile
 import urllib.parse
 import shutil
+import gdown
 
 # Titre de l'application
 st.title("📊 Analyse et Création Interactive d'Indices Financiers")
@@ -34,14 +35,12 @@ import requests
 
 @st.cache_data
 def charger_donnees():
-    url = "https://docs.google.com/uc?id=1aTZh6I3Xe2kzgXlkS9520-ThuYDBVYFi&export=download"
+    url = "https://drive.google.com/uc?id=1aTZh6I3Xe2kzgXlkS9520-ThuYDBVYFi"
     local_path = "Data projet indices python.xlsx"
 
-    # Télécharger le fichier depuis Google Drive
+    # Télécharger le fichier via gdown
     if not os.path.exists(local_path):
-        response = requests.get(url)
-        with open(local_path, "wb") as f:
-            f.write(response.content)
+        gdown.download(url, local_path, quiet=False)
 
     # Charger les données
     index_data = pd.read_excel(local_path, sheet_name='Index')
