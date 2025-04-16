@@ -34,15 +34,17 @@ import requests
 
 
 @st.cache_data
+import requests
+
 def charger_donnees():
-    url = "https://drive.google.com/uc?id=1aTZh6I3Xe2kzgXlkS9520-ThuYDBVYFi"
+    url = "https://docs.google.com/uc?export=download&id=1aTZh6I3Xe2kzgXlkS9520-ThuYDBVYFi"
     local_path = "Data projet indices python.xlsx"
-
-    # Télécharger le fichier via gdown
+    
     if not os.path.exists(local_path):
-        gdown.download(url, local_path, quiet=False)
+        r = requests.get(url)
+        with open(local_path, 'wb') as f:
+            f.write(r.content)
 
-    # Charger les données
     index_data = pd.read_excel(local_path, sheet_name='Index')
     forex_data = pd.read_excel(local_path, sheet_name="Forex")
     members_data = pd.read_excel(local_path, sheet_name='Members')
@@ -51,7 +53,7 @@ def charger_donnees():
     qualitativ_2018 = pd.read_excel(local_path, sheet_name="Qualitativ_2018")
     qualitativ_2019 = pd.read_excel(local_path, sheet_name="Qualitativ_2019")
     qualitativ_2020 = pd.read_excel(local_path, sheet_name="Qualitativ_2020")
-
+    
     return {
         'index_data': index_data,
         'forex_data': forex_data,
