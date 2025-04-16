@@ -9,7 +9,6 @@ from io import BytesIO
 import zipfile
 import urllib.parse
 import shutil
-import gdown
 import requests
 
 # Titre de l'application
