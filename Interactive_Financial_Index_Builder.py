@@ -29,17 +29,27 @@ Grâce à cette plateforme, vous pourrez également explorer des indices basés 
 """)
 
 # Chargement des données avec mise en cache
+import requests
+
 @st.cache_data
 def charger_donnees():
-    chemin = os.path.join(os.getcwd(), 'Data projet indices python.xlsx')
-    index_data = pd.read_excel(chemin, sheet_name='Index')
-    forex_data = pd.read_excel(chemin, sheet_name="Forex")
-    members_data = pd.read_excel(chemin, sheet_name='Members')
-    spx_prices = pd.read_excel(chemin, sheet_name='SPX_PX_LAST')
-    sxxp_prices = pd.read_excel(chemin, sheet_name='SXXP_PX_LAST')
-    qualitativ_2018 = pd.read_excel(chemin, sheet_name="Qualitativ_2018")
-    qualitativ_2019 = pd.read_excel(chemin, sheet_name="Qualitativ_2019")
-    qualitativ_2020 = pd.read_excel(chemin, sheet_name="Qualitativ_2020")
+    url = "https://docs.google.com/uc?id=1aTZh6I3Xe2kzgXlkS9520-ThuYDBVYFi&export=download" 
+    local_filename = "Data projet indices python.xlsx"
+
+    # Télécharger le fichier s'il n'existe pas déjà localement
+    if not os.path.exists(local_filename):
+        with open(local_filename, 'wb') as f:
+            response = requests.get(url)
+            f.write(response.content)
+
+    index_data = pd.read_excel(local_filename, sheet_name='Index')
+    forex_data = pd.read_excel(local_filename, sheet_name="Forex")
+    members_data = pd.read_excel(local_filename, sheet_name='Members')
+    spx_prices = pd.read_excel(local_filename, sheet_name='SPX_PX_LAST')
+    sxxp_prices = pd.read_excel(local_filename, sheet_name='SXXP_PX_LAST')
+    qualitativ_2018 = pd.read_excel(local_filename, sheet_name="Qualitativ_2018")
+    qualitativ_2019 = pd.read_excel(local_filename, sheet_name="Qualitativ_2019")
+    qualitativ_2020 = pd.read_excel(local_filename, sheet_name="Qualitativ_2020")
     
     return {
         'index_data': index_data,
@@ -54,6 +64,7 @@ def charger_donnees():
 
 # Charger les données
 donnees = charger_donnees()
+
 
 def dataframe_to_image(df, filename, decimals=2):
     """
