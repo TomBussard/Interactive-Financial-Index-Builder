@@ -10,6 +10,7 @@ import zipfile
 import urllib.parse
 import shutil
 import gdown
+import requests
 
 # Titre de l'application
 st.title("📊 Analyse et Création Interactive d'Indices Financiers")
@@ -30,11 +31,8 @@ Grâce à cette plateforme, vous pourrez également explorer des indices basés 
 """)
 
 # Chargement des données avec mise en cache
-import requests
-
 
 @st.cache_data
-import requests
 
 def charger_donnees():
     url = "https://docs.google.com/uc?export=download&id=1aTZh6I3Xe2kzgXlkS9520-ThuYDBVYFi"
