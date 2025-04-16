@@ -32,25 +32,24 @@ Grâce à cette plateforme, vous pourrez également explorer des indices basés 
 # Chargement des données avec mise en cache
 
 @st.cache_data
-
 def charger_donnees():
-    url = "https://docs.google.com/uc?export=download&id=1aTZh6I3Xe2kzgXlkS9520-ThuYDBVYFi"
+    url = "https://www.dropbox.com/scl/fi/aazc2gnzofqjee5fsc9sm/Data-projet-indices-python.xlsx?rlkey=6vyz3mbazfqx4c665ud6mnesj&st=9vzw1bf8&dl=1"
     local_path = "Data projet indices python.xlsx"
-    
+
     if not os.path.exists(local_path):
         r = requests.get(url)
         with open(local_path, 'wb') as f:
             f.write(r.content)
 
-    index_data = pd.read_excel(local_path, sheet_name='Index')
-    forex_data = pd.read_excel(local_path, sheet_name="Forex")
-    members_data = pd.read_excel(local_path, sheet_name='Members')
-    spx_prices = pd.read_excel(local_path, sheet_name='SPX_PX_LAST')
-    sxxp_prices = pd.read_excel(local_path, sheet_name='SXXP_PX_LAST')
-    qualitativ_2018 = pd.read_excel(local_path, sheet_name="Qualitativ_2018")
-    qualitativ_2019 = pd.read_excel(local_path, sheet_name="Qualitativ_2019")
-    qualitativ_2020 = pd.read_excel(local_path, sheet_name="Qualitativ_2020")
-    
+    index_data = pd.read_excel(local_path, sheet_name='Index', engine='openpyxl')
+    forex_data = pd.read_excel(local_path, sheet_name="Forex", engine='openpyxl')
+    members_data = pd.read_excel(local_path, sheet_name='Members', engine='openpyxl')
+    spx_prices = pd.read_excel(local_path, sheet_name='SPX_PX_LAST', engine='openpyxl')
+    sxxp_prices = pd.read_excel(local_path, sheet_name='SXXP_PX_LAST', engine='openpyxl')
+    qualitativ_2018 = pd.read_excel(local_path, sheet_name="Qualitativ_2018", engine='openpyxl')
+    qualitativ_2019 = pd.read_excel(local_path, sheet_name="Qualitativ_2019", engine='openpyxl')
+    qualitativ_2020 = pd.read_excel(local_path, sheet_name="Qualitativ_2020", engine='openpyxl')
+
     return {
         'index_data': index_data,
         'forex_data': forex_data,
@@ -62,8 +61,6 @@ def charger_donnees():
         'qualitativ_2020': qualitativ_2020,
     }
 
-
-# Charger les données
 donnees = charger_donnees()
 
 
