@@ -31,26 +31,28 @@ Grâce à cette plateforme, vous pourrez également explorer des indices basés 
 # Chargement des données avec mise en cache
 import requests
 
+
 @st.cache_data
 def charger_donnees():
-    url = "https://docs.google.com/uc?id=1aTZh6I3Xe2kzgXlkS9520-ThuYDBVYFi&export=download" 
-    local_filename = "Data projet indices python.xlsx"
+    url = "https://docs.google.com/uc?id=1aTZh6I3Xe2kzgXlkS9520-ThuYDBVYFi&export=download"
+    local_path = "Data projet indices python.xlsx"
 
-    # Télécharger le fichier s'il n'existe pas déjà localement
-    if not os.path.exists(local_filename):
-        with open(local_filename, 'wb') as f:
-            response = requests.get(url)
+    # Télécharger le fichier depuis Google Drive
+    if not os.path.exists(local_path):
+        response = requests.get(url)
+        with open(local_path, "wb") as f:
             f.write(response.content)
 
-    index_data = pd.read_excel(local_filename, sheet_name='Index')
-    forex_data = pd.read_excel(local_filename, sheet_name="Forex")
-    members_data = pd.read_excel(local_filename, sheet_name='Members')
-    spx_prices = pd.read_excel(local_filename, sheet_name='SPX_PX_LAST')
-    sxxp_prices = pd.read_excel(local_filename, sheet_name='SXXP_PX_LAST')
-    qualitativ_2018 = pd.read_excel(local_filename, sheet_name="Qualitativ_2018")
-    qualitativ_2019 = pd.read_excel(local_filename, sheet_name="Qualitativ_2019")
-    qualitativ_2020 = pd.read_excel(local_filename, sheet_name="Qualitativ_2020")
-    
+    # Charger les données
+    index_data = pd.read_excel(local_path, sheet_name='Index')
+    forex_data = pd.read_excel(local_path, sheet_name="Forex")
+    members_data = pd.read_excel(local_path, sheet_name='Members')
+    spx_prices = pd.read_excel(local_path, sheet_name='SPX_PX_LAST')
+    sxxp_prices = pd.read_excel(local_path, sheet_name='SXXP_PX_LAST')
+    qualitativ_2018 = pd.read_excel(local_path, sheet_name="Qualitativ_2018")
+    qualitativ_2019 = pd.read_excel(local_path, sheet_name="Qualitativ_2019")
+    qualitativ_2020 = pd.read_excel(local_path, sheet_name="Qualitativ_2020")
+
     return {
         'index_data': index_data,
         'forex_data': forex_data,
@@ -61,6 +63,7 @@ def charger_donnees():
         'qualitativ_2019': qualitativ_2019,
         'qualitativ_2020': qualitativ_2020,
     }
+
 
 # Charger les données
 donnees = charger_donnees()
